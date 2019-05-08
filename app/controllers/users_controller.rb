@@ -5,6 +5,20 @@ class UsersController < ApplicationController
         erb :'users/index'
     end
 
+    get "/login" do
+        session[:user_id] = 1
+        redirect "/"
+    end
+
+    get "/check" do 
+        binding.pry
+    end
+
+    get "/logout" do
+        session.clear
+        redirect "/"
+    end
+
 end
 
 

@@ -17,20 +17,50 @@ class PokemonsController < ApplicationController
         else
             redirect "/pokemons"
         end
-
+        
     end
-
+    
+    get '/pokemons/:id/edit' do 
+        @pokemon = Pokemon.find_by_id(params["id"])
+        if @pokemon
+            erb :'pokemons/edit'
+        else
+            redirect "/pokemons"
+        end
+    end
+    
     post '/pokemons' do 
         pokemon = Pokemon.new(name: params["name"], evolved: params["evolved"], power: params["power"])
-
+        
         if pokemon.save
             redirect "/pokemons/#{pokemon.id}"
         else
             redirect "/pokemons/new"
         end
     end
+    
+    
+    patch '/pokemons/:id' do
+        @pokemon = Pokemon.find_by_id(params["id"])
+        
+        if @pokemon.update(name: params["name"], evolved: params["evolved"], power: params["power"])
+            redirect "/pokemons/#{@pokemon.id}"
+        else
+            erb :"/pokemons/edit"
+        end
+        
+    end
+    
+    
+    delete "/pokemons/:id" do
+        @pokemon = Pokemon.find_by_id(params["id"])
 
-
+        if @pokemon.destroy
+            redirect "/pokemons"
+        else
+            redirect "/pokemons/#{@pokemon.id}"
+        end
+    end
 end
 
 

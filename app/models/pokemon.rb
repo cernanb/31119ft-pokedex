@@ -1,3 +1,4 @@
 class Pokemon < ActiveRecord::Base
-    validates :name, presence: true
+    validates :name, :power, presence: true
+    validates :name, length: { minimum: 4 }
 end

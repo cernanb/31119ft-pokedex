@@ -1,3 +1,7 @@
 <h1><%= @pokemon.name %></h1>
 <h4><%= @pokemon.power %></h4>
 <h4><%= @pokemon.evolved ? "Evolved" : "Not Evovled Yet" %></h4>
+<form method="POST" action="/pokemons/<%= @pokemon.id %>">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="submit" value="DELETE">
+</form>

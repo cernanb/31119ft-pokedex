@@ -1,0 +1,17 @@
+<% if @pokemon.errors %>
+    <% @pokemon.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+
+<% end %>
+
+
+<h1>Editing <%= @pokemon.name%></h1>
+
+<form method="POST" action="/pokemons/<%= @pokemon.id %>">
+    <input id="hidden" type="hidden" name="_method" value="patch" />
+    Name: <input name="name" type="text" value="<%= @pokemon.name %>">
+    Power: <input name="power" type="text" value="<%= @pokemon.power %>">
+    Evovled? <input type="checkbox" name="evolved" value="1"> 
+    <input type="submit">
+</form>
